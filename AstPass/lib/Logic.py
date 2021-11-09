@@ -1,4 +1,4 @@
-# noinspection PyPep8Naming
+# Password class and obj str
 class Password:
     _pString: object
 
