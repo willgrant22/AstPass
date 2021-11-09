@@ -1,4 +1,4 @@
-# Password class and obj strf
+# Password class and obj str
 class Password:
     _pString: object
 
