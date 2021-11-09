@@ -2,7 +2,7 @@
 class Password:
     _pString: object
 
-    def __init__(self, pString: object):
+    def __init__(self, pString: object = ""):
         self._pString = pString
 
     @property

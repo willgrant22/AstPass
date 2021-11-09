@@ -87,14 +87,16 @@ class App(wx.Frame):
         self.Layout()
         self.Centre()
 
-    # ToDo create window focus function
-
-    # noinspection PyPep8Naming
+    # Submit button event
     @staticmethod
     def onSubmit(event, Length: int, Symbols: bool, Numbers: bool, Uppercase: bool, Lowercase: bool):
+        # Initializing dataclass instance
         control_state = ap.CurrentState(Length, Symbols, Numbers, Uppercase, Lowercase)
-        var = ap.Password('fuck')
+        # Initializing Password class & object instance
+        pVar = ap.Password()
         print(control_state)
 
+    # Clear button event
     def onClear(self, event):
         pass
+# ToDo create window focus function
