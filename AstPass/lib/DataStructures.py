@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-
 # Dataclass to structure UI state
 @dataclass(init=True, repr=False, eq=False, order=False, unsafe_hash=False, frozen=True)
 class CurrentState:
@@ -10,5 +9,3 @@ class CurrentState:
     Numbers: bool
     Uppercase: bool
     Lowercase: bool
-
-

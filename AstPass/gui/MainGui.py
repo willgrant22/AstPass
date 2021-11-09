@@ -1,9 +1,7 @@
 import wx
-# noinspection PyPep8Naming
 import AstPass as ap
 
-
-# noinspection PyPep8Naming,PyUnusedLocal
+# Main GUI class
 class App(wx.Frame):
     def __init__(self, *args, **kwds):
         kwds["style"] = kwds.get("style",
@@ -99,4 +97,5 @@ class App(wx.Frame):
     # Clear button event
     def onClear(self, event):
         pass
+
 # ToDo create window focus function
