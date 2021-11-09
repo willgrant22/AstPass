@@ -1,2 +1,3 @@
+from .gui.MainGui import App
 from .lib.DataStructures import CurrentState
-from .gui.MainGui  import App
+from .lib.Logic import Password

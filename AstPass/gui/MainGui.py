@@ -1,9 +1,13 @@
 import wx
+# noinspection PyPep8Naming
 import AstPass as ap
 
+
+# noinspection PyPep8Naming,PyUnusedLocal
 class App(wx.Frame):
     def __init__(self, *args, **kwds):
-        kwds["style"] = kwds.get("style", 0) | wx.BORDER_SIMPLE | wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.SYSTEM_MENU
+        kwds["style"] = kwds.get("style",
+                                 0) | wx.BORDER_SIMPLE | wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.SYSTEM_MENU
         wx.Frame.__init__(self, *args, **kwds)
         self.SetTitle("AstPass")
 
@@ -30,7 +34,8 @@ class App(wx.Frame):
         static_text_2 = wx.StaticText(self.panel_1, wx.ID_ANY, "Length ")
         grid_sizer_1.Add(static_text_2, (2, 1), (1, 1), wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 0)
 
-        self.length_spin = wx.SpinCtrl(self.panel_1, wx.ID_ANY, "8", min=8, max=120, style=wx.ALIGN_LEFT | wx.SP_ARROW_KEYS)
+        self.length_spin = wx.SpinCtrl(self.panel_1, wx.ID_ANY, "8", min=8, max=120,
+                                       style=wx.ALIGN_LEFT | wx.SP_ARROW_KEYS)
         grid_sizer_1.Add(self.length_spin, (2, 2), (1, 1), wx.ALIGN_CENTER_VERTICAL | wx.EXPAND, 0)
 
         self.symbols_checkbox = wx.CheckBox(self.panel_1, wx.ID_ANY, "Symbols  ", style=wx.CHK_2STATE)
@@ -52,12 +57,16 @@ class App(wx.Frame):
         grid_sizer_1.Add(sizer_2, (3, 7), (2, 3), wx.ALL | wx.EXPAND, 0)
 
         self.submit_button = wx.Button(self.panel_1, wx.ID_ANY, "Submit ", style=wx.BU_AUTODRAW)
-        self.submit_button.Bind(wx.EVT_BUTTON, lambda event: self.OnSubmit(event, self.length_spin.GetValue(), self.symbols_checkbox.GetValue(), self.numbers_checkbox.GetValue(), self.uppercase_checkbox.GetValue(), self.lowercase_checkbox.GetValue()))
+        self.submit_button.Bind(wx.EVT_BUTTON, lambda event: self.onSubmit(event, self.length_spin.GetValue(),
+                                                                           self.symbols_checkbox.GetValue(),
+                                                                           self.numbers_checkbox.GetValue(),
+                                                                           self.uppercase_checkbox.GetValue(),
+                                                                           self.lowercase_checkbox.GetValue()))
         self.submit_button.SetDefault()
         sizer_2.Add(self.submit_button, (0, 0), (1, 1), wx.EXPAND, 0)
 
         self.clear_button = wx.Button(self.panel_1, wx.ID_ANY, "Clear ", style=wx.BU_AUTODRAW)
-        self.clear_button.Bind(wx.EVT_BUTTON, self.OnClear)
+        self.clear_button.Bind(wx.EVT_BUTTON, self.onClear)
         sizer_2.Add(self.clear_button, (0, 1), (1, 1), wx.EXPAND, 0)
 
         grid_sizer_1.Add(0, 20, (4, 10), (1, 1), wx.EXPAND, 0)
@@ -78,9 +87,14 @@ class App(wx.Frame):
         self.Layout()
         self.Centre()
 
-    def OnSubmit(self, event, Length: int, Symbols: bool, Numbers: bool, Uppercase: bool, Lowercase: bool):
-        ControlState = ap.CurrentState(Length, Symbols, Numbers, Uppercase, Lowercase)
-        print(ControlState)
+    # ToDo create window focus function
 
-    def OnClear(self, event):
+    # noinspection PyPep8Naming
+    @staticmethod
+    def onSubmit(event, Length: int, Symbols: bool, Numbers: bool, Uppercase: bool, Lowercase: bool):
+        control_state = ap.CurrentState(Length, Symbols, Numbers, Uppercase, Lowercase)
+        var = ap.Password('fuck')
+        print(control_state)
+
+    def onClear(self, event):
         pass
