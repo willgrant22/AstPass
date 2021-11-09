@@ -32,7 +32,7 @@ class App(wx.Frame):
         static_text_2 = wx.StaticText(self.panel_1, wx.ID_ANY, "Length ")
         grid_sizer_1.Add(static_text_2, (2, 1), (1, 1), wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 0)
 
-        self.length_spin = wx.SpinCtrl(self.panel_1, wx.ID_ANY, "8", min=8, max=120,
+        self.length_spin = wx.SpinCtrl(self.panel_1, wx.ID_ANY, "0", min=0, max=120,
                                        style=wx.ALIGN_LEFT | wx.SP_ARROW_KEYS)
         grid_sizer_1.Add(self.length_spin, (2, 2), (1, 1), wx.ALIGN_CENTER_VERTICAL | wx.EXPAND, 0)
 
@@ -59,12 +59,19 @@ class App(wx.Frame):
                                                                            self.symbols_checkbox.GetValue(),
                                                                            self.numbers_checkbox.GetValue(),
                                                                            self.uppercase_checkbox.GetValue(),
-                                                                           self.lowercase_checkbox.GetValue()))
+                                                                           self.lowercase_checkbox.GetValue(),
+                                                                           self.main_text_ctrl))
         self.submit_button.SetDefault()
         sizer_2.Add(self.submit_button, (0, 0), (1, 1), wx.EXPAND, 0)
 
         self.clear_button = wx.Button(self.panel_1, wx.ID_ANY, "Clear ", style=wx.BU_AUTODRAW)
-        self.clear_button.Bind(wx.EVT_BUTTON, self.onClear)
+        self.clear_button.Bind(wx.EVT_BUTTON, lambda event: self.onClear(event, self.length_spin,
+                                                                           self.symbols_checkbox,
+                                                                           self.numbers_checkbox,
+                                                                           self.uppercase_checkbox,
+                                                                           self.lowercase_checkbox,
+                                                                           self.all_toggle,
+                                                                           self.main_text_ctrl))
         sizer_2.Add(self.clear_button, (0, 1), (1, 1), wx.EXPAND, 0)
 
         grid_sizer_1.Add(0, 20, (4, 10), (1, 1), wx.EXPAND, 0)
@@ -87,15 +94,29 @@ class App(wx.Frame):
 
     # Submit button event
     @staticmethod
-    def onSubmit(event, Length: int, Symbols: bool, Numbers: bool, Uppercase: bool, Lowercase: bool):
-        # Initializing dataclass instance
+    def onSubmit(event, Length: int, Symbols: bool, Numbers: bool, Uppercase: bool, Lowercase: bool, Text):
+        # Initializing dataclass instance, Password class, object instance & enabling text ctrl
         control_state = ap.CurrentState(Length, Symbols, Numbers, Uppercase, Lowercase)
-        # Initializing Password class & object instance
-        pVar = ap.Password()
-        print(control_state)
+        pInstance = ap.Password.MakePassword(control_state)
+        password_value = pInstance.pString
+        Text.SetValue(password_value)
+        Text.SetFocus()
+        Text.Copy()
 
     # Clear button event
-    def onClear(self, event):
-        pass
+    @staticmethod
+    def onClear(event, Length, Symbols, Numbers, Uppercase, Lowercase, Toggle, Text):
+        Length.SetValue(0)
+        Symbols.SetValue(False)
+        Numbers.SetValue(False)
+        Uppercase.SetValue(False)
+        Lowercase.SetValue(False)
+        Toggle.SetValue(False)
+        Length.Disable()
+        Length.Enable()
+        Text.Clear()
+        Text.Disable()
+        Text.Enable()
+
 
 # ToDo create window focus function

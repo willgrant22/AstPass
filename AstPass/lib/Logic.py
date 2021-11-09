@@ -1,7 +1,6 @@
 # Password class and object string
 class Password:
-    _pString: object
-    def __init__(self, pString: object = ""):
+    def __init__(self, pString = ""):
         self._pString = pString
 
     @property
@@ -15,3 +14,8 @@ class Password:
     @pString.deleter
     def pString(self):
         del self._pString
+
+    @classmethod
+    def MakePassword( cls, control_state ) -> str:
+        pString = "PASSWORD PLACEHOLDER"
+        return cls(pString)
